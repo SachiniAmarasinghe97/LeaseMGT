@@ -1,0 +1,23 @@
+@use "./variables.scss" as *;
+
+@mixin dark-theme() {
+  --primary-color: #{$system-color};
+  --primary-focus-color: #{$system-black};
+  --primary-gradient: #{to right, $system-gradient1, $system-gradient2};
+  --primary-background-color: #{$system-black};
+  --secondary-background-color: #{$system-dark-gray};
+  --input-background-color: #{$system-black};
+  --primary-text-color: #{$system-white};
+  --primary-shadow-color: #00000040;
+}
+
+@mixin light-theme() {
+  --primary-color: #{$system-color};
+  --primary-focus-color: #{$system-dark-gray};
+  --primary-gradient: #{to right, $system-gradient1, $system-gradient2};
+  --primary-background-color: #{$system-white};
+  --secondary-background-color: #{$system-light-gray};
+  --input-background-color: #{$system-white};
+  --primary-text-color: #{$system-black};
+  --primary-shadow-color: #00000040;
+}

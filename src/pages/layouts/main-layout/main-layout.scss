@@ -1,0 +1,30 @@
+@import "../../../styles/variables.scss";
+
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.3s ease-in-out;
+}
+
+.layout-content {
+  flex-grow: 1;
+  padding: 20px;
+  margin-top: 65px; // Adjust this value to match the height of the navbar
+  margin-bottom: 45px; // Adjust this value to match the height of the footer
+  margin-left: 250px; // Adjust the margin to account for the sidebar width
+  transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+.sidebar {
+  width: 250px;
+  transition: width 0.3s ease-in-out;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.layout-content.collapsed {
+  margin-left: 80px;
+}

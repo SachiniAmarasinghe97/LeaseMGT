@@ -1,0 +1,85 @@
+.container {
+  padding: 20px;
+}
+
+.summary-card {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.summary-card h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.summary-card h6 {
+  font-weight: normal;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.summary-card p {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: -1;
+}
+
+.card h2,
+.card h3 {
+  margin: 0 0 10px;
+}
+
+.card p {
+  margin: 0 0 5px;
+}
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.no-results {
+  display: flex;
+  justify-content: center;
+  color: black;
+  text-align: center;
+}
+
+.advanced-text {
+  font-style: italic;
+  color: #555;
+}
+
+.nft-link-text {
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.nft-link-text:hover {
+  text-decoration: none;
+}
+
+.batch-card {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 30px 0 10px 0;
+}

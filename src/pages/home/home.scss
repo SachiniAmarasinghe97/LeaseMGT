@@ -1,0 +1,97 @@
+.home-page {
+  .add-button {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    float: right;
+    background-color: var(--primary-color) !important;
+    border-color: #a5a2a2;
+    color: #dbe0cd;
+    &:hover {
+      background-color: var(--primary-color) !important;
+    }
+  }
+
+  .table-container {
+    margin-top: 20px;
+  }
+
+  .id-header-name {
+    width: 150px;
+  }
+
+  .nft-header-name {
+    width: 300px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    table-layout: fixed; // Ensure the table layout is fixed
+    margin-bottom: 30px;
+  }
+
+  th,
+  td {
+    border: 1px solid #ddd !important;
+    padding: 8px;
+    text-align: left;
+    word-wrap: break-word; // Ensure long words break to the next line
+  }
+
+  th {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+
+  tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  .pagination-container {
+    position: fixed !important;
+    bottom: 45px;
+    left: calc(250px + 0px);
+    right: 0;
+    background-color: white !important;
+    text-align: right;
+    padding: 5px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .page-number {
+    cursor: pointer;
+    margin: 0 5px;
+    color: #007bff; // Default color
+  }
+
+  .page-number.active {
+    color: rgb(0, 0, 0) !important; // Current page color
+    background-color: transparent !important;
+  }
+
+  .page-number.next {
+    margin-left: 20px; // Add space between the last number and the Next button
+  }
+
+  .page-number.previous {
+    margin-right: 20px; // Add space between the Previous button and the first number
+  }
+
+  .lease-badge {
+    margin-right: 2px;
+  }
+
+  .blink-hover {
+    transition: color 0.3s ease;
+  }
+
+  .blink-hover:hover {
+    color: #007bff;
+  }
+}
