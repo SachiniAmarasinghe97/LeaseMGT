@@ -13,6 +13,18 @@ export default class HttpService {
         });
     });
   }
+  async putAsync(apiUrl: string, method: string, data: any = {}): Promise<any> {
+    return new Promise((resolve, reject) => {
+      axios
+        .put(`${apiUrl}/${method}`, data)
+        .then((response) => {
+          resolve(response.data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  }
 
   async getAsync(apiUrl: string, method: string, params: any = {}): Promise<any> {
     return new Promise((resolve, reject) => {

@@ -5,9 +5,8 @@ import { useEffect, useState } from "react";
 import Loader from "./components/loader-small";
 import { RouteNames } from "./common/constants";
 import MainLayout from "./pages/layouts/main-layout/main-layout";
-import Provenance from "./pages/provenance/provenance";
-import ExportOrders from "./pages/export-orders/export-orders";
 import React from "react";
+import LeaseOrders from "./pages/lease-orders/lease-orders";
 
 let initCalled = false;
 
@@ -32,9 +31,8 @@ function AppRoutes() {
   return initialized ? (
     <BrowserRouter>
       <Routes>
-        <Route path={RouteNames.Provenance} element={<Provenance />} />
         <Route path="/" element={<MainLayout />}>
-          <Route path={RouteNames.ExportOrders} element={<ExportOrders />} />
+          <Route path={RouteNames.LeaseOrders} element={<LeaseOrders />} />
           <Route path={RouteNames.NotFound} element={<NotFound />} />
         </Route>
       </Routes>
