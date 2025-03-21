@@ -11,7 +11,7 @@ function App() {
     <>
       <ServiceProvider>
         <ThemeProvider>
-          <Home /> {/* Render the Home component */}
+          <Home />
         </ThemeProvider>
       </ServiceProvider>
       <ToastContainer />
