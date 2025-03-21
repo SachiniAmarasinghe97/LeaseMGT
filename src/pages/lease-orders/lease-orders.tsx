@@ -38,7 +38,7 @@ export default function LeaseOrders() {
       const leaseOrderList = await leaseService.getLeaseOrdersAsync();
       setLeaseOrderList(leaseOrderList ?? []);
     } catch (e: any) {
-      ToastMessage.show("Failed to fetch lease orders. Please try again.");
+      ToastMessage.show("Failed to fetch lease orders. Please try again.", "error");
     } finally {
       setOrderListLoading(false);
     }
@@ -49,7 +49,7 @@ export default function LeaseOrders() {
       const leases = await leaseService.getLeasesAsync();
       setLeases(leases);
     } catch (error) {
-      ToastMessage.show("Failed to fetch leases. Please try again.");
+      ToastMessage.show("Failed to fetch leases. Please try again.", "error");
     }
   }, [leaseService]);
 
@@ -73,11 +73,11 @@ export default function LeaseOrders() {
           }
           setLeaseOrderList(leaseOrderList.filter((order) => order.reference !== res.reference));
         } else {
-          ToastMessage.show("Failed to delete lease order. Please try again.");
+          ToastMessage.show("Failed to delete lease order. Please try again.", "error");
         }
       } catch (e: any) {
         console.log(e);
-        ToastMessage.show("Failed to delete lease order. Please try again.");
+        ToastMessage.show("Failed to delete lease order. Please try again.", "error");
       } finally {
         setLoading(false);
       }
@@ -189,13 +189,13 @@ export default function LeaseOrders() {
         if (res) {
           await loadLeasesAsync();
           await loadDataAsync();
-          ToastMessage.show("Leases uploaded successfully");
+          ToastMessage.show("Leases uploaded successfully", "success");
         } else {
-          ToastMessage.show("Failed to upload leases");
+          ToastMessage.show("Failed to upload leases", "error");
         }
       } catch (error) {
         console.error("Error uploading leases:", error);
-        ToastMessage.show("Failed to upload leases");
+        ToastMessage.show("Failed to upload leases"), "error";
       } finally {
         setLoading(false);
       }
@@ -213,10 +213,10 @@ export default function LeaseOrders() {
       a.click();
       a.remove();
       window.URL.revokeObjectURL(url);
-      ToastMessage.show("Leases downloaded successfully");
+      ToastMessage.show("Leases downloaded successfully", "success");
     } catch (error) {
       console.error("Error downloading leases:", error);
-      ToastMessage.show("Failed to download leases");
+      ToastMessage.show("Failed to download leases", "error");
     }
   };
 
