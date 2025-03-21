@@ -87,10 +87,16 @@ export default function LeaseOrders() {
 
   const handleCreateLeaseOrder = useCallback(async () => {
     if (loading) return;
+
+    if (!newLeaseOrder.selectedLeases.length) {
+      setWarningMessage("Please select at least one lease");
+      return;
+    }
+
     setLoading(true);
 
     const payload = {
-      id: newLeaseOrder.reference ?? 0,
+      reference: newLeaseOrder.reference ?? 0,
       title: newLeaseOrder.title,
       description: newLeaseOrder.description,
       leases: newLeaseOrder.selectedLeases,
@@ -273,7 +279,7 @@ export default function LeaseOrders() {
           {selectedOrder ? (
             <div>
               <p>
-                <strong>Id:</strong> {selectedOrder.reference}
+                <strong>Reference:</strong> {selectedOrder.reference}
               </p>
               <p>
                 <strong>Title:</strong> {selectedOrder.title}
