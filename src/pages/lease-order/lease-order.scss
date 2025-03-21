@@ -36,3 +36,22 @@
   font-size: 1.5rem; /* Increase the font size */
   margin-bottom: 40px; /* Add space between title and parameters */
 }
+
+.toast-message {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.toast-message.success {
+  background-color: #28a745; // Green for success
+}
+
+.toast-message.error {
+  background-color: #dc3545; // Red for errors
+}

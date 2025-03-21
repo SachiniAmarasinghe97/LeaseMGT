@@ -26,7 +26,7 @@ export default function LeaseOrder() {
         setLeases(leases);
       }
     } catch (e: any) {
-      ToastMessage.show("Failed to fetch data. Please try again.");
+      ToastMessage.show("Failed to fetch data. Please try again.", "error");
     } finally {
       setLoading(false);
     }
