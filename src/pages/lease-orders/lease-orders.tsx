@@ -229,10 +229,10 @@ export default function LeaseOrders() {
         <div className="col">
           <div className="text-end">
             <input type="file" id="upload-button" style={{ display: "none" }} onChange={handleUpload} />
-            <label htmlFor="upload-button" className="btn">
+            <label className="action-button" data-title="Upload and update leases" htmlFor="upload-button">
               <FontAwesomeIcon icon={faUpload} />
             </label>
-            <label className="btn" onClick={handleDownload}>
+            <label className="action-button" data-title="Download existing leases" onClick={handleDownload}>
               <FontAwesomeIcon icon={faDownload} />
             </label>
           </div>

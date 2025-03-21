@@ -35,6 +35,7 @@
     position: relative;
     transition: color 0.2s; // Add transition for smooth color change
     margin-right: 20px;
+    cursor: pointer;
   }
 
   .action-button[data-title]::after {
@@ -211,11 +212,11 @@
     font-weight: bold;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
-  
+
   .toast-message.success {
     background-color: #28a745; // Green for success
   }
-  
+
   .toast-message.error {
     background-color: #dc3545; // Red for errors
   }
