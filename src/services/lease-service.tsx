@@ -34,4 +34,28 @@ export default class LeaseService {
     const response = await this.httpService.putAsync(apiUrl, "update-lease-order-nft", { reference, nftId });
     return response.leaseOrder;
   }
+
+  async uploadLeaseFileAsync(file: File): Promise<any> {
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const response = await this.httpService.putAsync(apiUrl, "upload-leases", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response;
+  }
+
+  async downloadLeasesAsync(): Promise<Blob> {
+    const response = await this.httpService.getAsync(
+      apiUrl,
+      "download-leases",
+      {},
+      {
+        responseType: "blob",
+      }
+    );
+    return response;
+  }
 }

@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import "./lease-orders.scss";
 import { Button, Modal, Form, Alert, Badge } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faCubes, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faCubes, faTrash, faUpload, faDownload } from "@fortawesome/free-solid-svg-icons";
 import { useServiceProvider } from "../../providers/service-provider";
 import LoaderSmall from "../../components/loader-small";
 import ToastMessage from "../../utils/toast-message";
@@ -180,9 +180,64 @@ export default function LeaseOrders() {
     }));
   };
 
+  const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      try {
+        setLoading(true);
+        const file = event.target.files[0];
+        const res = await leaseService.uploadLeaseFileAsync(file);
+        if (res) {
+          await loadLeasesAsync();
+          await loadDataAsync();
+          ToastMessage.show("Leases uploaded successfully");
+        } else {
+          ToastMessage.show("Failed to upload leases");
+        }
+      } catch (error) {
+        console.error("Error uploading leases:", error);
+        ToastMessage.show("Failed to upload leases");
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  const handleDownload = async () => {
+    try {
+      const blob = await leaseService.downloadLeasesAsync();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "leases.json";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+      ToastMessage.show("Leases downloaded successfully");
+    } catch (error) {
+      console.error("Error downloading leases:", error);
+      ToastMessage.show("Failed to download leases");
+    }
+  };
+
   return (
     <div className="lease-orders-page">
-      <h1>Lease Policies</h1>
+      <div className="row">
+        <div className="col">
+          <h1>Lease Policies</h1>
+        </div>
+        <div className="col">
+          <div className="text-end">
+            <input type="file" id="upload-button" style={{ display: "none" }} onChange={handleUpload} />
+            <label htmlFor="upload-button" className="btn">
+              <FontAwesomeIcon icon={faUpload} />
+            </label>
+            <label className="btn" onClick={handleDownload}>
+              <FontAwesomeIcon icon={faDownload} />
+            </label>
+          </div>
+        </div>
+      </div>
       <Button
         className="add-button"
         onClick={() => {
