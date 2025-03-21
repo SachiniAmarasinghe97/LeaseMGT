@@ -38,7 +38,7 @@ export default function LeaseOrders() {
       const leaseOrderList = await leaseService.getLeaseOrdersAsync();
       setLeaseOrderList(leaseOrderList ?? []);
     } catch (e: any) {
-      ToastMessage.show("Failed to fetch lease orders. Please try again.", "error");
+      ToastMessage.show("Failed to fetch lease Policys. Please try again.", "error");
     } finally {
       setOrderListLoading(false);
     }
@@ -73,11 +73,11 @@ export default function LeaseOrders() {
           }
           setLeaseOrderList(leaseOrderList.filter((order) => order.reference !== res.reference));
         } else {
-          ToastMessage.show("Failed to delete lease order. Please try again.", "error");
+          ToastMessage.show("Failed to delete lease Policy. Please try again.", "error");
         }
       } catch (e: any) {
         console.log(e);
-        ToastMessage.show("Failed to delete lease order. Please try again.", "error");
+        ToastMessage.show("Failed to delete lease Policy. Please try again.", "error");
       } finally {
         setLoading(false);
       }
@@ -115,7 +115,7 @@ export default function LeaseOrders() {
             setShowLeaseModal(false);
           } else {
             setLeaseOrderList([response, ...leaseOrderList]);
-            setWarningMessage("Failed to create lease order. Please try again.");
+            setWarningMessage("Failed to create lease Policy. Please try again.");
           }
         } else {
           setLeaseOrderList([response, ...leaseOrderList]);
@@ -195,7 +195,7 @@ export default function LeaseOrders() {
         }
       } catch (error) {
         console.error("Error uploading leases:", error);
-        ToastMessage.show("Failed to upload leases","error");
+        ToastMessage.show("Failed to upload leases", "error");
       } finally {
         setLoading(false);
       }
@@ -272,7 +272,7 @@ export default function LeaseOrders() {
                   <>
                     {paginatedLeaseOrders.length === 0 ? (
                       <tr>
-                        <td colSpan={3}>No lease orders added</td>
+                        <td colSpan={3}>No lease Policys added</td>
                       </tr>
                     ) : (
                       paginatedLeaseOrders.map((order, index) => (
@@ -287,15 +287,15 @@ export default function LeaseOrders() {
                           ))}
                         </td> */}
                           <td>
-                            <Button className="action-button" data-title="View Lease Order" onClick={() => handleViewLeaseOrder(order)}>
+                            <Button className="action-button" data-title="View Lease Policy" onClick={() => handleViewLeaseOrder(order)}>
                               <FontAwesomeIcon icon={faEye} />
                             </Button>
                             {order.nftId && (
-                              <Button className="action-button" data-title="View Lease Order NFT" onClick={() => window.open(UtilHelper.getNftLink(order.nftId), "_blank")}>
+                              <Button className="action-button" data-title="View Lease Policy NFT" onClick={() => window.open(UtilHelper.getNftLink(order.nftId), "_blank")}>
                                 <FontAwesomeIcon icon={faCubes} />
                               </Button>
                             )}
-                            <Button className="action-button" data-title="Delete Lease Order" onClick={() => handleDeleteLeaseOrder(order.reference)}>
+                            <Button className="action-button" data-title="Delete Lease Policy" onClick={() => handleDeleteLeaseOrder(order.reference)}>
                               <FontAwesomeIcon icon={faTrash} />
                             </Button>
                           </td>
@@ -328,7 +328,7 @@ export default function LeaseOrders() {
       </div>
       <Modal show={showModal} onHide={handleCloseModal} backdrop="static">
         <Modal.Header closeButton>
-          <Modal.Title>{selectedOrder ? "Lease Order Details" : "Create New Lease Order"}</Modal.Title>
+          <Modal.Title>{selectedOrder ? "Lease Policy Details" : "Create New Lease Policy"}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {selectedOrder ? (
@@ -370,13 +370,13 @@ export default function LeaseOrders() {
               {warningMessage && <Alert variant="danger">{warningMessage}</Alert>}
               <Form.Group controlId="formLeaseOrderName" className="form-group">
                 <Form.Label className="required">Title</Form.Label>
-                <Form.Control type="text" placeholder="Enter lease order name" value={newLeaseOrder.title} onChange={(e) => setNewLeaseOrder({ ...newLeaseOrder, title: e.target.value })} required />
+                <Form.Control type="text" placeholder="Enter lease Policy name" value={newLeaseOrder.title} onChange={(e) => setNewLeaseOrder({ ...newLeaseOrder, title: e.target.value })} required />
               </Form.Group>
               <Form.Group controlId="formLeaseOrderDescription" className="form-group">
                 <Form.Label className="required">Description</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter lease order description"
+                  placeholder="Enter lease Policy description"
                   value={newLeaseOrder.description}
                   onChange={(e) => setNewLeaseOrder({ ...newLeaseOrder, description: e.target.value })}
                   required
