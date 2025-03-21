@@ -89,8 +89,8 @@ export default function LeaseOrders() {
   };
 
   const handleViewLeaseOrder = async (order: { id: any; }) => {
-    // const orderDetails = await leaseService.viewLeaseOrderAsync(order.id);
-    // setSelectedOrder(orderDetails);
+    const orderDetails = await leaseService.getLeaseOrderAsync(order.id);
+    setSelectedOrder(orderDetails);
     setShowModal(true);
   };
 
