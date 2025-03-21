@@ -38,4 +38,17 @@ export default class HttpService {
         });
     });
   }
+
+  async deleteAsync(apiUrl: string, method: string, params: any = {}): Promise<any> {
+    return new Promise((resolve, reject) => {
+      axios
+        .delete(`${apiUrl}/${method}`, params)
+        .then((response) => {
+          resolve(response.data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  }
 }

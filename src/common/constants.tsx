@@ -3,3 +3,8 @@ export class RouteNames {
   static LeaseOrders = "/";
   static NotFound = "*";
 }
+
+export class TransactionTypes {
+  static NFTokenMint = "NFTokenMint";
+  static NFTokenBurn = "NFTokenBurn";
+}

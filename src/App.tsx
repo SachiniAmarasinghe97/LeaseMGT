@@ -2,6 +2,7 @@ import "./App.scss";
 import { ServiceProvider } from "./providers/service-provider";
 import AppRoutes from "./AppRoutes";
 import { ThemeProvider } from "./providers/theme-provider";
+import { ToastContainer } from "react-bootstrap";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
           <AppRoutes />
         </ThemeProvider>
       </ServiceProvider>
+      <ToastContainer />
     </>
   );
 }
