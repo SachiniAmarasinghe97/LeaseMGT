@@ -195,7 +195,7 @@ export default function LeaseOrders() {
         }
       } catch (error) {
         console.error("Error uploading leases:", error);
-        ToastMessage.show("Failed to upload leases"), "error";
+        ToastMessage.show("Failed to upload leases","error");
       } finally {
         setLoading(false);
       }
