@@ -1,6 +1,6 @@
 @import "../../styles/variables.scss";
 
-.export-orders-page {
+.lease-orders-page {
   .add-button {
     margin-left: 10px;
     margin-bottom: 10px;
@@ -14,11 +14,15 @@
     }
   }
 
+  .download-btn {
+    margin-left: 10px;
+  }
+
   .table-container {
     margin-top: 20px;
   }
 
-  .eye-button {
+  .action-button {
     background: none !important;
     color: $system-color; // Set color for delete button
     border: none !important;
@@ -30,9 +34,10 @@
     justify-content: center;
     position: relative;
     transition: color 0.2s; // Add transition for smooth color change
+    margin-right: 20px;
   }
 
-  .eye-button[data-title]::after {
+  .action-button[data-title]::after {
     content: attr(data-title);
     position: absolute;
     bottom: 100%;
@@ -50,11 +55,11 @@
     font-size: 12px;
   }
 
-  .eye-button[data-title]:hover::after {
+  .action-button[data-title]:hover::after {
     opacity: 1;
   }
 
-  .eye-button:hover {
+  .action-button:hover {
     color: $system-light-gray !important;
   }
 
@@ -195,5 +200,4 @@
   .page-number.previous {
     margin-right: 20px; // Add space between the Previous button and the first number
   }
-
 }

@@ -1,45 +1,31 @@
-import React, { createContext, ReactNode, useContext } from "react";
-import StorageService from "../services/common/storage-service";
-import EventEmitter from "eventemitter3";
-// import ProvenanceService from "../services/common/provenance-service";
-// import ExportOrderService from "../services/export-order-service";
+import { createContext, ReactNode, useContext } from "react";
 import LeaseService from "../services/lease-service";
-import PolicyService from "../services/policy-service";
+import HttpService from "../services/common/http-service";
+import XrplService from "../services/integrations/xrpl-service";
+
+const walletSecret: string = process.env.REACT_APP_XRP_WALLET_SECRET || "";
+const server: string = process.env.REACT_APP_XRP_SERVER || "";
 
 class Dependencies {
   appName!: string;
-  initAsync!: () => Promise<void>;
-  eventEmitter: EventEmitter;
-  storageService: StorageService;
-  // provenanceService!: ProvenanceService;
-  // exportOrderService!: ExportOrderService;
   leaseService: LeaseService;
-  policyService: PolicyService;
+  xrplService: XrplService;
 }
 
 const ServiceContext = createContext(new Dependencies());
 
 export const ServiceProvider = ({ children }: { children: ReactNode }) => {
   const appName = process.env.REACT_APP_NAME ?? "";
-  const eventEmitter = new EventEmitter();
-  const storageService = new StorageService();
-  // const provenanceService = new ProvenanceService(contractService);
-  // const exportOrderService = new ExportOrderService(contractService);
-
-  const initAsync = async () => {
-  };
+  const httpService = new HttpService();
+  const leaseService = new LeaseService(httpService);
+  const xrplService = new XrplService(server, walletSecret);
 
   return (
     <ServiceContext.Provider
       value={{
         appName,
-        initAsync,
-        eventEmitter,
-        storageService,
-        leaseService: new LeaseService(),
-        policyService: new PolicyService(),
-        // provenanceService,
-        // exportOrderService,
+        leaseService,
+        xrplService,
       }}
     >
       {children}

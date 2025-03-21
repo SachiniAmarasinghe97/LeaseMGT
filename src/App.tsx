@@ -3,15 +3,14 @@ import { ServiceProvider } from "./providers/service-provider";
 import AppRoutes from "./AppRoutes";
 import { ThemeProvider } from "./providers/theme-provider";
 import { ToastContainer } from "react-toastify";
-import React from "react";
-import Home from "./pages/home/home"; // Import the Home component
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <>
       <ServiceProvider>
         <ThemeProvider>
-          <Home />
+          <AppRoutes />
         </ThemeProvider>
       </ServiceProvider>
       <ToastContainer />

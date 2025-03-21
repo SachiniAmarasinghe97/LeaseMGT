@@ -68,3 +68,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Deploy to Azure Web App
+
+```
+npm install -g @azure/static-web-apps-cli
+swa deploy -n <static-web-app-name> -d <deployment-token> .\build\ --env production
+```

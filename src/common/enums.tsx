@@ -9,8 +9,3 @@ export enum ThemeMode {
   Light,
   Dark,
 }
-
-export enum ContractRequestType {
-  ReadRequest,
-  ContractIntput,
-}
