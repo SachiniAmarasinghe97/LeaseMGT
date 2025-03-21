@@ -4,6 +4,7 @@ import { useServiceProvider } from "../../providers/service-provider";
 import ToastMessage from "../../utils/toast-message";
 import LoaderSmall from "../../components/loader-small";
 import { useParams } from "react-router-dom";
+import { Card } from "react-bootstrap";
 
 export default function LeaseOrder() {
   const [loading, setLoading] = useState(false);
@@ -41,34 +42,47 @@ export default function LeaseOrder() {
   return loading ? (
     <LoaderSmall style={{ height: "50vh" }} />
   ) : leaseOrder ? (
-    <div className="lease-order">
-      {Object.entries(leaseOrder).map((en) => {
-        const key = en[0];
-        const val = en[1];
-        return key === "leases" ? (
-          <div key={key}>
-            <div>Leases</div>
-            {(val as any).map((l: any) => {
-              const lease = leases.find((x) => x.reference === l);
-              return Object.entries(lease).map((e) => {
-                const k = e[0];
-                const v = e[1];
-                return (
-                  <div key={k}>
-                    <div>{k}</div>
-                    <div>{v as string}</div>
-                  </div>
-                );
-              });
+    <div className="lease-order-page">
+      <Card className="lease-order-card">
+        <Card.Body>
+          <Card.Title>Lease Order Details <hr /></Card.Title>
+          <div className="lease-order-details">
+            <div className="detail-item">
+              <strong>Reference:</strong> {leaseOrder.reference}
+            </div>
+            <div className="detail-item">
+              <strong>Title:</strong> {leaseOrder.title}
+            </div>
+            <div className="detail-item">
+              <strong>Description:</strong> {leaseOrder.description}
+            </div>
+            <div className="detail-item">
+              <strong>Created On:</strong> {new Date(leaseOrder.createdAt).toLocaleString()}
+            </div>
+            <div className="detail-item">
+              <strong>Leases:</strong>
+              <ul>
+                {(leaseOrder.leases ?? []).map((leaseRef: string, index: number) => {
+                  const lease = leases.find((l) => l.reference === leaseRef);
+                  return (
+                    <li key={index}>
+                      {lease?.title && lease.description ? `${lease?.title} (${lease?.description})` : `${lease?.reference.slice(0, 10)}...`}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            {Object.entries(leaseOrder).map(([key, value]) => {
+              if (["reference", "title", "description", "createdAt", "leases"].includes(key)) return null;
+              return (
+                <div className="detail-item" key={key}>
+                  <strong>{key === "nftId" ? "NFT ID" : key}:</strong> {value as string}
+                </div>
+              );
             })}
           </div>
-        ) : (
-          <div key={key}>
-            <div>{key}</div>
-            <div>{val as string}</div>
-          </div>
-        );
-      })}
+        </Card.Body>
+      </Card>
     </div>
   ) : (
     <div>No lease policy found</div>
