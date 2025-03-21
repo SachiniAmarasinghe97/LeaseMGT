@@ -61,16 +61,14 @@ export default function LeaseOrder() {
             </div>
             <div className="detail-item">
               <strong>Leases:</strong>
-              <ul>
-                {(leaseOrder.leases ?? []).map((leaseRef: string, index: number) => {
+              {(leaseOrder.leases ?? [])
+                .map((leaseRef: string) => {
                   const lease = leases.find((l) => l.reference === leaseRef);
-                  return (
-                    <li key={index}>
-                      {lease?.title && lease.description ? `${lease?.title} (${lease?.description})` : `${lease?.reference.slice(0, 10)}...`}
-                    </li>
-                  );
-                })}
-              </ul>
+                  return lease?.title
+                    ? `${lease.title} (${lease.description})`
+                    : `${lease?.reference.slice(0, 10)}...`;
+                })
+                .join(", ")}
             </div>
             {Object.entries(leaseOrder).map(([key, value]) => {
               if (["reference", "title", "description", "createdAt", "leases"].includes(key)) return null;
