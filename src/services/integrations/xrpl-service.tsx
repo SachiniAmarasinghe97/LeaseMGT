@@ -23,7 +23,6 @@ export default class XrplService {
       await this.client.connect();
       const result = await this.client.submitAndWait(transaction, { wallet: this.wallet });
       await this.client.disconnect();
-      console.log("Mint NFT transaction submission result:", result);
       return result;
     } catch (error) {
       await this.client.disconnect();
@@ -41,7 +40,6 @@ export default class XrplService {
       await this.client.connect();
       const result = await this.client.submitAndWait(transaction, { wallet: this.wallet });
       await this.client.disconnect();
-      console.log("Burn NFT transaction submission result:", result);
       return result;
     } catch (error) {
       await this.client.disconnect();
