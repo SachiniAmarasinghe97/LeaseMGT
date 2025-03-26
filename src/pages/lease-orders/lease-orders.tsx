@@ -222,10 +222,10 @@ export default function LeaseOrders() {
             ToastMessage.show("Failed to upload leases", "error");
           }
         } else {
-          ToastMessage.show("Invalid file format");
+          ToastMessage.show("Invalid file format", "error");
         }
       } catch (error) {
-        ToastMessage.show(`Failed to upload leases: ${error}`);
+        ToastMessage.show(`Failed to upload leases: ${error}`, "error");
       } finally {
         setLoading(false);
       }
