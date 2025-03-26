@@ -185,17 +185,47 @@ export default function LeaseOrders() {
       try {
         setLoading(true);
         const file = event.target.files[0];
-        const res = await leaseService.uploadLeaseFileAsync(file);
-        if (res) {
-          await loadLeasesAsync();
-          await loadDataAsync();
-          ToastMessage.show("Leases uploaded successfully", "success");
+        if (file.type !== "application/json") {
+          ToastMessage.show("Only json files are allowed", "error");
+          return;
+        }
+        const p = new Promise<boolean>((resolve, reject) => {
+          try {
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+              const fileContent = e.target?.result;
+              if (fileContent) {
+                try {
+                  const jsonContent = JSON.parse(fileContent as string);
+                  if (!Array.isArray(jsonContent)) reject("File content should be in json array format");
+                  else if (jsonContent.some((o, i) => jsonContent.some((d, j) => i !== j && d.reference === o.reference))) reject("Duplicate lease references found");
+                  else resolve(true);
+                } catch (error) {
+                  reject(`Error parsing JSON file: ${error}`);
+                }
+              } else {
+                reject("File cannot be empty");
+              }
+            };
+            reader.readAsText(file);
+          } catch (e) {
+            reject(e);
+          }
+        });
+        if (await p) {
+          const res = await leaseService.uploadLeaseFileAsync(file);
+          if (res) {
+            await loadLeasesAsync();
+            await loadDataAsync();
+            ToastMessage.show("Leases uploaded successfully", "success");
+          } else {
+            ToastMessage.show("Failed to upload leases", "error");
+          }
         } else {
-          ToastMessage.show("Failed to upload leases", "error");
+          ToastMessage.show("Invalid file format", "error");
         }
       } catch (error) {
-        console.error("Error uploading leases:", error);
-        ToastMessage.show("Failed to upload leases","error");
+        ToastMessage.show(`Failed to upload leases: ${error}`, "error");
       } finally {
         setLoading(false);
       }
