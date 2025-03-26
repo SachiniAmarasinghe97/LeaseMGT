@@ -225,7 +225,8 @@ export default function LeaseOrders() {
           ToastMessage.show("Invalid file format", "error");
         }
       } catch (error) {
-        ToastMessage.show(`Failed to upload leases: ${error}`, "error");
+        console.error("Error uploading leases:", error);
+        ToastMessage.show("Failed to upload leases", "error");
       } finally {
         setLoading(false);
       }
@@ -377,14 +378,22 @@ export default function LeaseOrders() {
               </p>
               <p>
                 <strong>Leases:</strong>{" "}
-                {(selectedOrder.leases ?? []).map((lease: any, index: number) => {
-                  const leaseObj = leases.find((l) => l.reference === lease);
-                  return (
-                    <Badge key={index} bg="success" className="lease-badge">
-                      {leaseObj?.title && leaseObj.description ? `${leaseObj?.title} (${leaseObj?.description})` : `${leaseObj?.reference.slice(0, 10)}...`}
-                    </Badge>
-                  );
-                })}
+                <div className="lease-badge-container">
+                  {Array.isArray(selectedOrder?.leases) ? (
+                    selectedOrder.leases.map((leaseRef: string, index: number) => {
+                      const lease = leases.find((l) => l.reference === leaseRef);
+                      return (
+                        <Badge key={index} bg="success" className="lease-badge">
+                          {lease?.title && lease.description
+                            ? `${lease?.title} (${lease?.description})`
+                            : `${lease?.reference.slice(0, 10)}...`}
+                        </Badge>
+                      );
+                    })
+                  ) : (
+                    <span>No leases available</span>
+                  )}
+                </div>
               </p>
               {selectedOrder.nftId && (
                 <p>
